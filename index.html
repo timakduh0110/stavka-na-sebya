@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Ставка на себя · Чемпионат мира 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ───────────────────────────────────────────────────────────
+   «Ставка на себя» — спутник на время ЧМ-2026.
+   Не букмекерский интерфейс. Спокойный, без мерцания и
+   случайных наград. Тёплый, достойный, надёжный.
+   ─────────────────────────────────────────────────────────── */
+:root{
+  --ink:#15181a;
+  --ink-2:#1b1f21;
+  --ink-3:#21262a;
+  --cream:#ece5d6;
+  --cream-dim:#9a9c92;
+  --cream-faint:#6f7269;
+  --sage:#8cbd9f;
+  --sage-deep:#5d8d71;
+  --amber:#d4a76b;
+  --line:rgba(236,229,214,.10);
+  --line-soft:rgba(236,229,214,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  background:var(--ink);
+  color:var(--cream);
+  font-family:'Manrope',system-ui,sans-serif;
+  font-size:16px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  display:flex;justify-content:center;
+  min-height:100dvh;
+  overflow-x:hidden;
+}
+/* атмосфера: мягкое свечение + зерно */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(120% 80% at 50% -10%, rgba(140,189,159,.10), transparent 55%),
+    radial-gradient(90% 60% at 50% 120%, rgba(212,167,107,.06), transparent 60%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+#app{position:relative;z-index:1;width:100%;max-width:468px;padding:26px 22px 40px;display:flex;flex-direction:column;min-height:100dvh}
+
+/* типографика */
+.serif{font-family:'Lora',Georgia,serif}
+h1,h2,h3{font-family:'Lora',Georgia,serif;font-weight:600;line-height:1.12}
+.eyebrow{font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--cream-faint);font-weight:600}
+.muted{color:var(--cream-dim)}
+.faint{color:var(--cream-faint)}
+.num{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+
+/* анимация появления */
+.rise{opacity:0;transform:translateY(10px);animation:rise .7s cubic-bezier(.22,.7,.3,1) forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+.d1{animation-delay:.05s}.d2{animation-delay:.13s}.d3{animation-delay:.21s}.d4{animation-delay:.29s}.d5{animation-delay:.37s}.d6{animation-delay:.45s}
+
+/* шапка */
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
+.brand{display:flex;align-items:center;gap:9px}
+.mark{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--sage);position:relative;flex:none}
+.mark::after{content:"";position:absolute;inset:6.5px;border-radius:50%;background:var(--sage)}
+.brand .name{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--cream)}
+.pill{font-size:11.5px;font-weight:600;color:var(--cream-dim);border:1px solid var(--line);border-radius:100px;padding:5px 11px;white-space:nowrap}
+.pill b{color:var(--sage);font-weight:700}
+
+/* hero */
+.hero{margin:8px 0 6px}
+.hero .lead{font-size:13px;color:var(--cream-dim);margin-bottom:14px}
+.figure{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.figure .big{font-family:'Lora',serif;font-size:clamp(56px,17vw,76px);font-weight:600;line-height:.9;color:var(--cream)}
+.figure .unit{font-family:'Lora',serif;font-size:26px;color:var(--cream-dim)}
+.hero .cap{margin-top:12px;font-size:14px;color:var(--cream-dim);max-width:34ch}
+.hero .cap b{color:var(--sage);font-weight:600}
+
+/* статистика */
+.stats{display:flex;gap:12px;margin:24px 0 22px}
+.stat{flex:1;background:var(--ink-2);border:1px solid var(--line-soft);border-radius:16px;padding:15px 15px 14px}
+.stat .v{font-family:'Lora',serif;font-size:30px;font-weight:600;line-height:1}
+.stat .v.green{color:var(--sage)}
+.stat .l{font-size:11.5px;color:var(--cream-faint);margin-top:7px;letter-spacing:.02em}
+
+/* кнопки */
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:none;cursor:pointer;
+  font-family:'Manrope',sans-serif;font-size:16px;font-weight:600;border-radius:15px;padding:18px;transition:.18s}
+.btn-primary{background:var(--sage);color:#10231a}
+.btn-primary:hover{background:#9bcaad}
+.btn-primary:active{transform:scale(.985)}
+.btn-ghost{background:transparent;color:var(--cream-dim);border:1px solid var(--line);font-size:14.5px;padding:15px;font-weight:600}
+.btn-ghost:hover{color:var(--cream);border-color:var(--cream-faint)}
+.btn-done{background:var(--ink-2);border:1px solid var(--sage-deep);color:var(--sage)}
+.btn[disabled]{cursor:default;opacity:1}
+
+.checkblock{margin-top:6px}
+.checkblock .sub{text-align:center;font-size:13px;color:var(--cream-faint);margin-top:13px;line-height:1.45}
+.checkblock .sub.done{color:var(--cream-dim)}
+
+/* таймлайн турнира */
+.section-h{display:flex;align-items:center;gap:12px;margin:34px 0 18px}
+.section-h .eyebrow{flex:none}
+.section-h .rule{flex:1;height:1px;background:var(--line)}
+.timeline{display:flex;flex-direction:column;gap:0;padding-left:4px}
+.node{display:flex;gap:16px;position:relative;padding-bottom:20px}
+.node:last-child{padding-bottom:0}
+.node .col{display:flex;flex-direction:column;align-items:center;flex:none}
+.dot{width:13px;height:13px;border-radius:50%;border:2px solid var(--cream-faint);background:var(--ink);margin-top:3px;z-index:1;transition:.3s}
+.line-v{width:2px;flex:1;background:var(--line);margin-top:2px}
+.node:last-child .line-v{display:none}
+.node.reached .dot{border-color:var(--sage);background:var(--sage)}
+.node.reached .line-v{background:var(--sage-deep)}
+.node.current .dot{border-color:var(--amber);background:var(--amber);box-shadow:0 0 0 5px rgba(212,167,107,.15)}
+.node .body{padding-bottom:2px}
+.node .t{font-family:'Lora',serif;font-size:17px;font-weight:600;color:var(--cream)}
+.node.future .t{color:var(--cream-faint)}
+.node .dt{font-size:12px;color:var(--cream-faint);margin-top:1px}
+.node.current .dt{color:var(--amber)}
+
+/* подвал */
+.foot{margin-top:auto;padding-top:30px;text-align:center}
+.foot .disc{font-size:11.5px;color:var(--cream-faint);line-height:1.6;max-width:32ch;margin:0 auto}
+.foot .links{margin-top:12px;display:flex;gap:18px;justify-content:center}
+.foot .links a{font-size:12px;color:var(--cream-dim);text-decoration:none;border-bottom:1px solid var(--line)}
+.foot .links a:hover{color:var(--cream)}
+
+/* ── ЭКРАН НАСТРОЙКИ ── */
+.setup{display:flex;flex-direction:column;justify-content:center;flex:1;gap:0}
+.setup .kicker{margin-bottom:18px}
+.setup h1{font-size:34px;margin-bottom:14px}
+.setup h1 em{font-style:italic;color:var(--sage)}
+.setup .intro{font-size:15px;color:var(--cream-dim);line-height:1.55;margin-bottom:30px;max-width:36ch}
+.field{margin-bottom:20px}
+.field label{display:block;font-size:13px;font-weight:600;color:var(--cream);margin-bottom:8px}
+.field .hint{font-size:12.5px;color:var(--cream-faint);margin-bottom:9px;line-height:1.45}
+.field input{width:100%;background:var(--ink-2);border:1px solid var(--line);border-radius:13px;
+  padding:15px 16px;color:var(--cream);font-family:'Manrope',sans-serif;font-size:16px;outline:none;transition:.18s}
+.field input:focus{border-color:var(--sage-deep)}
+.field input::placeholder{color:var(--cream-faint)}
+.amount-wrap{position:relative}
+.amount-wrap .cur{position:absolute;right:16px;top:50%;transform:translateY(-50%);color:var(--cream-faint);font-size:16px}
+.setup .skip{text-align:center;margin-top:14px;font-size:13px;color:var(--cream-faint)}
+
+/* ── ОВЕРЛЕЙ «ТЯЖЕЛО СЕЙЧАС» ── */
+.overlay{position:fixed;inset:0;z-index:50;background:rgba(13,15,16,.97);backdrop-filter:blur(6px);
+  display:none;flex-direction:column;align-items:center;justify-content:center;padding:34px 26px;text-align:center;overflow-y:auto}
+.overlay.on{display:flex;animation:fade .4s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.overlay .ov-inner{max-width:360px;width:100%;display:flex;flex-direction:column;align-items:center}
+.breath{width:172px;height:172px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;margin:6px 0 8px}
+.breath .ring{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(140,189,159,.22),rgba(140,189,159,.04));
+  border:1.5px solid rgba(140,189,159,.4);animation:breathe 9s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(.62);opacity:.55}50%{transform:scale(1);opacity:1}}
+.breath .timer{position:relative;font-family:'Lora',serif;font-size:44px;font-weight:600;color:var(--cream);font-variant-numeric:tabular-nums}
+.overlay h2{font-size:24px;margin:14px 0 12px}
+.overlay p{font-size:14.5px;color:var(--cream-dim);line-height:1.6;margin-bottom:10px}
+.overlay p.reframe{color:var(--cream);background:var(--ink-2);border:1px solid var(--line);border-radius:14px;padding:15px 17px;margin:8px 0 20px;font-size:14px}
+.overlay .ov-actions{width:100%;display:flex;flex-direction:column;gap:11px;margin-top:6px}
+.overlay .help-note{font-size:12px;color:var(--cream-faint);margin-top:18px;line-height:1.6}
+.overlay .help-note b{color:var(--cream-dim)}
+.breath-cta{font-size:13px;color:var(--sage);background:none;border:none;cursor:pointer;margin-top:4px;font-family:inherit;font-weight:600}
+
+/* завершение */
+.done-screen{display:flex;flex-direction:column;justify-content:center;flex:1;text-align:center;align-items:center}
+.done-screen .trophy{font-size:46px;margin-bottom:18px}
+.done-screen h1{font-size:32px;margin-bottom:16px}
+.done-screen p{color:var(--cream-dim);font-size:15px;line-height:1.6;max-width:34ch;margin-bottom:10px}
+.done-screen .total{font-family:'Lora',serif;font-size:52px;color:var(--sage);margin:18px 0 6px}
+
+.hidden{display:none!important}
+a.reset{font-size:12px;color:var(--cream-faint);text-decoration:none;border-bottom:1px solid var(--line)}
+a.reset:hover{color:var(--cream-dim)}
+</style>
+</head>
+<body>
+<div id="app"><!-- рендерится из JS --></div>
+
+<!-- Оверлей поддержки в момент тяги -->
+<div class="overlay" id="overlay">
+  <div class="ov-inner">
+    <div class="breath"><div class="ring"></div><div class="timer" id="ovTimer">5:00</div></div>
+    <button class="breath-cta" id="breathBtn">запустить 5 минут вместе</button>
+    <h2 class="serif">Сейчас тяжело. Это пройдёт.</h2>
+    <p>Тяга — это волна. Она поднимается, держится пару минут и спадает. Сама. Если переждать — она станет тише.</p>
+    <p class="reframe">Поставить кажется решением. Но математика букмекера не меняется от того, как сильно ты хочешь. В среднем — это всегда минус. Не сегодня.</p>
+    <div class="ov-actions">
+      <a class="btn btn-primary" id="botBtn" href="#" target="_blank" rel="noopener">Написать боту «Ставка на себя»</a>
+      <button class="btn btn-ghost" id="okBtn">Я переждал. Возвращаюсь.</button>
+    </div>
+    <div class="help-note" id="helpNote">
+      <b>Если хочется поговорить с человеком:</b><br>
+      Анонимные Игроки (GA) проводят встречи на русском — оффлайн и онлайн.<br>
+      <span id="helplineSlot">Телефон доверия: <i>добавь сюда проверённый номер для своего региона</i></span>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ════════════════════════════════════════════════════════════
+   НАСТРОЙКА — замени под свой проект
+   ════════════════════════════════════════════════════════════ */
+const BOT_URL  = "https://t.me/"; // ← @username твоего бота, напр. https://t.me/stavkanasebya_bot
+const WC_START = "2026-06-11";    // открытие ЧМ
+const WC_END   = "2026-07-19";    // финал
+
+/* Этапы турнира (даты ориентировочные — поправь по сетке) */
+const MILESTONES = [
+  {key:"2026-06-11", t:"Открытие",        dt:"11 июня · первый свисток"},
+  {key:"2026-06-27", t:"Группы пройдены", dt:"27 июня"},
+  {key:"2026-07-01", t:"1/16 финала",     dt:"начало плей-офф"},
+  {key:"2026-07-07", t:"1/8 финала",      dt:"7 июля"},
+  {key:"2026-07-11", t:"1/4 финала",      dt:"11 июля"},
+  {key:"2026-07-15", t:"1/2 финала",      dt:"15 июля"},
+  {key:"2026-07-19", t:"Финал",           dt:"19 июля · последний день"},
+];
+
+/* ── надёжное хранилище: localStorage с откатом в память ── */
+const Store = (() => {
+  let mem = {};
+  let ok = false;
+  try { const k="__t"; localStorage.setItem(k,"1"); localStorage.removeItem(k); ok=true; } catch(e){ ok=false; }
+  return {
+    get(k){ try{ return ok ? localStorage.getItem(k) : (mem[k]??null); }catch(e){ return mem[k]??null; } },
+    set(k,v){ try{ ok ? localStorage.setItem(k,v) : (mem[k]=v); }catch(e){ mem[k]=v; } },
+    del(k){ try{ ok ? localStorage.removeItem(k) : (delete mem[k]); }catch(e){ delete mem[k]; } }
+  };
+})();
+const KEY="stavka_na_sebya_cm2026";
+
+let state = load();
+function load(){
+  try{ const raw=Store.get(KEY); if(raw) return JSON.parse(raw); }catch(e){}
+  return { setup:false, name:"", daily:0, checkins:[] };
+}
+function save(){ Store.set(KEY, JSON.stringify(state)); }
+
+/* ── даты ── */
+function todayKey(){
+  const d=new Date(), p=n=>String(n).padStart(2,"0");
+  return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`;
+}
+function toDate(k){ const [y,m,d]=k.split("-").map(Number); return new Date(y,m-1,d); }
+function diffDays(a,b){ return Math.round((toDate(b)-toDate(a))/86400000); } // b - a
+function fmtMoney(n){ return n.toLocaleString("ru-RU"); }
+function plural(n,one,few,many){
+  const m10=n%10, m100=n%100;
+  if(m10===1&&m100!==11) return one;
+  if(m10>=2&&m10<=4&&(m100<10||m100>=20)) return few;
+  return many;
+}
+function dayWord(n){ return plural(n,"день","дня","дней"); }
+
+/* ── вычисления ── */
+function checkedToday(){ return state.checkins.includes(todayKey()); }
+function totalDays(){ return state.checkins.length; }
+function moneyKept(){ return totalDays()*(state.daily||0); }
+function currentStreak(){
+  if(!state.checkins.length) return 0;
+  const set=new Set(state.checkins);
+  const today=todayKey();
+  // стрик считаем от сегодня, если отмечено; иначе от вчера (без наказания за «ещё не отметил сегодня»)
+  let start = set.has(today) ? today : null;
+  if(!start){
+    const y=new Date(); y.setDate(y.getDate()-1);
+    const p=n=>String(n).padStart(2,"0");
+    const yk=`${y.getFullYear()}-${p(y.getMonth()+1)}-${p(y.getDate())}`;
+    if(set.has(yk)) start=yk; else return 0;
+  }
+  let streak=0, cur=toDate(start);
+  while(true){
+    const p=n=>String(n).padStart(2,"0");
+    const k=`${cur.getFullYear()}-${p(cur.getMonth()+1)}-${p(cur.getDate())}`;
+    if(set.has(k)){ streak++; cur.setDate(cur.getDate()-1); } else break;
+  }
+  return streak;
+}
+function tournament(){
+  const t=todayKey();
+  const toStart=diffDays(t,WC_START);   // >0 если ещё не начался
+  const afterEnd=diffDays(WC_END,t);    // >0 если уже закончился
+  if(toStart>0) return {phase:"before", toStart};
+  if(afterEnd>0) return {phase:"after"};
+  const total=diffDays(WC_START,WC_END)+1;
+  const day=diffDays(WC_START,t)+1;
+  return {phase:"active", day, total};
+}
+
+/* ════════════════════════════════════════════════════════════
+   РЕНДЕР
+   ════════════════════════════════════════════════════════════ */
+const app=document.getElementById("app");
+
+function render(){
+  if(!state.setup){ renderSetup(); return; }
+  const tr=tournament();
+  if(tr.phase==="after"){ renderDone(); return; }
+  renderMain(tr);
+}
+
+function renderSetup(){
+  app.innerHTML=`
+    <div class="setup">
+      <div class="eyebrow kicker rise d1">Чемпионат мира 2026</div>
+      <h1 class="rise d2">39 дней. Один турнир.<br><em>Одна ставка — на себя.</em></h1>
+      <p class="intro rise d3">Весь чемпионат вокруг будут звать поставить. Этот спутник — про обратное: дойти от открытия до финала, не сделав ни одной ставки. Каждый день — твой.</p>
+
+      <div class="field rise d4">
+        <label for="nameIn">Как тебя называть?</label>
+        <div class="hint">Необязательно. Останется только на этом устройстве.</div>
+        <input id="nameIn" type="text" placeholder="Имя" autocomplete="off" maxlength="24" />
+      </div>
+
+      <div class="field rise d5">
+        <label for="amtIn">Сколько ты обычно ставил за день матчей?</label>
+        <div class="hint">Это станет счётчиком денег, которые остаются у тебя. Можно пропустить.</div>
+        <div class="amount-wrap">
+          <input id="amtIn" type="number" inputmode="numeric" min="0" placeholder="напр. 1000" />
+          <span class="cur">₽</span>
+        </div>
+      </div>
+
+      <button class="btn btn-primary rise d6" id="startBtn">Я в деле</button>
+      <div class="skip rise d6">Ни одной ставки за весь чемпионат — вот и вся цель.</div>
+    </div>`;
+  document.getElementById("startBtn").onclick=()=>{
+    state.name=(document.getElementById("nameIn").value||"").trim();
+    const a=parseInt(document.getElementById("amtIn").value,10);
+    state.daily=(!isNaN(a)&&a>0)?a:0;
+    state.setup=true;
+    save(); render();
+  };
+}
+
+function renderMain(tr){
+  const did=checkedToday();
+  const streak=currentStreak();
+  const total=totalDays();
+  const kept=moneyKept();
+  const name=state.name?`, ${state.name}`:"";
+
+  // статус турнира
+  let pill;
+  if(tr.phase==="before") pill=`До первого свистка <b>${tr.toStart} ${dayWord(tr.toStart)}</b>`;
+  else pill=`Турнир идёт · день <b>${tr.day}</b> из ${tr.total}`;
+
+  // hero: если задана сумма — деньги; иначе — дни
+  let heroLead, heroBig, heroUnit, heroCap;
+  if(state.daily>0){
+    heroLead = total>0 ? "Осталось у тебя, а не у конторы" : "Здесь будет копиться то, что осталось у тебя";
+    heroBig  = fmtMoney(kept);
+    heroUnit = "₽";
+    heroCap  = total>0
+      ? `За <b>${total} ${dayWord(total)}</b> ты не отдал этих денег никому. Они просто остались.`
+      : `Отметь первый день — и счётчик пойдёт.`;
+  } else {
+    heroLead = "С собой, а не против себя";
+    heroBig  = String(total);
+    heroUnit = dayWord(total);
+    heroCap  = total>0 ? `<b>${total} ${dayWord(total)}</b> без ставок. Каждый — твой выбор.` : `Отметь первый день — отсюда всё и начинается.`;
+  }
+
+  // блок отметки
+  const checkBlock = did
+    ? `<button class="btn btn-done" disabled>✓ Сегодня отмечено</button>
+       <div class="sub done">Сегодня — твоя. Возвращайся завтра.</div>`
+    : `<button class="btn btn-primary" id="checkBtn">Сегодня я не поставил</button>
+       <div class="sub">Одна отметка в день. Без героизма — просто честно.</div>`;
+
+  // таймлайн
+  const t=todayKey();
+  let lastReached=-1;
+  MILESTONES.forEach((m,i)=>{ if(diffDays(m.key,t)>=0) lastReached=i; });
+  const nodes=MILESTONES.map((m,i)=>{
+    const reached=diffDays(m.key,t)>=0;
+    const current=(i===lastReached);
+    const cls=current?"current":reached?"reached":"future";
+    return `<div class="node ${cls}">
+      <div class="col"><div class="dot"></div><div class="line-v"></div></div>
+      <div class="body"><div class="t">${m.t}</div><div class="dt">${m.dt}</div></div>
+    </div>`;
+  }).join("");
+
+  app.innerHTML=`
+    <div class="top rise d1">
+      <div class="brand"><div class="mark"></div><div class="name">Ставка&nbsp;на&nbsp;себя</div></div>
+      <div class="pill">${pill}</div>
+    </div>
+
+    <div class="hero rise d2">
+      <div class="lead">Привет${name}. ${heroLead}.</div>
+      <div class="figure"><div class="big num">${heroBig}</div><div class="unit">${heroUnit}</div></div>
+      <div class="cap">${heroCap}</div>
+    </div>
+
+    <div class="stats rise d3">
+      <div class="stat"><div class="v green num">${streak}</div><div class="l">${dayWord(streak)} подряд</div></div>
+      <div class="stat"><div class="v num">${total}</div><div class="l">${dayWord(total)} всего</div></div>
+      ${state.daily>0?`<div class="stat"><div class="v num">${fmtMoney(kept)}</div><div class="l">₽ при тебе</div></div>`:""}
+    </div>
+
+    <div class="checkblock rise d4">${checkBlock}</div>
+
+    <button class="btn btn-ghost rise d4" id="urgeBtn" style="margin-top:11px">Тяжело прямо сейчас?</button>
+
+    <div class="section-h rise d5"><div class="eyebrow">Путь до финала</div><div class="rule"></div></div>
+    <div class="timeline rise d5">${nodes}</div>
+
+    <div class="foot rise d6">
+      <p class="disc">Это не медицинская помощь и не лечение. Спутник, чтобы продержаться. Если тяжело — обратись к специалисту.</p>
+      <div class="links">
+        <a id="footBot" href="${BOT_URL}" target="_blank" rel="noopener">Бот поддержки</a>
+        <a class="reset" id="resetLink" href="#">Сбросить</a>
+      </div>
+    </div>`;
+
+  const cb=document.getElementById("checkBtn");
+  if(cb) cb.onclick=()=>{ const k=todayKey(); if(!state.checkins.includes(k)){ state.checkins.push(k); save(); } render(); };
+  document.getElementById("urgeBtn").onclick=openUrge;
+  document.getElementById("resetLink").onclick=(e)=>{
+    e.preventDefault();
+    if(confirm("Сбросить весь прогресс? Это нельзя отменить.")){ state={setup:false,name:"",daily:0,checkins:[]}; save(); render(); }
+  };
+}
+
+function renderDone(){
+  const total=totalDays();
+  const kept=moneyKept();
+  app.innerHTML=`
+    <div class="done-screen">
+      <div class="trophy rise d1">🕯️</div>
+      <div class="eyebrow rise d1" style="margin-bottom:14px">Чемпионат окончен</div>
+      <h1 class="serif rise d2">Ты прошёл весь турнир,<br>не сделав ни одной ставки.</h1>
+      ${state.daily>0?`<div class="total num rise d3">${fmtMoney(kept)} ₽</div><p class="rise d3">остались у тебя</p>`:""}
+      <p class="rise d4">${total} ${dayWord(total)} ты выбирал себя — пока вокруг ставили. Это и была твоя ставка. И она сыграла.</p>
+      <div style="width:100%;max-width:300px;margin-top:26px" class="rise d5">
+        <a class="btn btn-primary" href="${BOT_URL}" target="_blank" rel="noopener">Что дальше — спросить у бота</a>
+        <a class="reset" id="resetLink2" href="#" style="display:inline-block;margin-top:18px">Начать заново</a>
+      </div>
+    </div>`;
+  document.getElementById("resetLink2").onclick=(e)=>{
+    e.preventDefault();
+    if(confirm("Начать заново? Текущий прогресс сотрётся.")){ state={setup:false,name:"",daily:0,checkins:[]}; save(); render(); }
+  };
+}
+
+/* ── оверлей «тяжело сейчас» ── */
+const overlay=document.getElementById("overlay");
+let timerId=null, timeLeft=300;
+function openUrge(){
+  overlay.classList.add("on");
+  document.getElementById("botBtn").href=BOT_URL;
+  resetTimer();
+}
+function closeUrge(){ overlay.classList.remove("on"); stopTimer(); }
+function fmtT(s){ const m=Math.floor(s/60), ss=String(s%60).padStart(2,"0"); return `${m}:${ss}`; }
+function resetTimer(){ stopTimer(); timeLeft=300; document.getElementById("ovTimer").textContent=fmtT(timeLeft); document.getElementById("breathBtn").textContent="запустить 5 минут вместе"; }
+function stopTimer(){ if(timerId){ clearInterval(timerId); timerId=null; } }
+document.getElementById("breathBtn").onclick=function(){
+  if(timerId){ stopTimer(); this.textContent="продолжить"; return; }
+  this.textContent="пауза";
+  timerId=setInterval(()=>{
+    timeLeft--;
+    document.getElementById("ovTimer").textContent= timeLeft>0 ? fmtT(timeLeft) : "—";
+    if(timeLeft<=0){
+      stopTimer();
+      document.getElementById("ovTimer").textContent="✓";
+      document.querySelector("#overlay h2").textContent="Волна прошла. Ты всё ещё здесь.";
+      document.getElementById("breathBtn").textContent="ещё раз";
+    }
+  },1000);
+};
+document.getElementById("okBtn").onclick=closeUrge;
+overlay.addEventListener("click",e=>{ if(e.target===overlay) closeUrge(); });
+
+/* старт */
+render();
+</script>
+</body>
+</html>

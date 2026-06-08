@@ -227,6 +227,9 @@ a.reset:hover{color:var(--cream-dim)}
 const BOT_URL = "https://t.me/SherlokNoBet_bot"; // ← клиентский бот Шерлок. Сверь @username, если менялся.
 const WC_START = "2026-06-11"; // открытие ЧМ
 const WC_END = "2026-07-19"; // финал
+// Аналитика приложения. Вставь сюда Apps Script /exec URL (тот же, что WEB_APP_URL у бота).
+// Пусто = аналитика выключена, на работу приложения не влияет.
+const APP_ANALYTICS_URL = "https://script.google.com/macros/s/AKfycbzRCeTObFr21T-fCPj383I37E3KStImj8Utm2OvgpIyJFLLIB8fzjbQ985Thhn0CGhT/exec";
 
 /* Этапы турнира (даты ориентировочные — поправь по сетке) */
 const MILESTONES = [
@@ -251,6 +254,28 @@ del(k){ try{ ok ? localStorage.removeItem(k) : (delete mem[k]); }catch(e){ delet
 };
 })();
 const KEY="stavka_na_sebya_cm2026";
+
+/* ── аналитика приложения (анонимно: только случайный client id) ── */
+function clientId_(){
+  let id = Store.get("cid");
+  if(!id){
+    id = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : (String(Date.now()) + Math.random().toString(16).slice(2));
+    Store.set("cid", id);
+  }
+  return id;
+}
+function pingEvent_(event){
+  if(!APP_ANALYTICS_URL) return;
+  try{
+    const src = new URLSearchParams(location.search).get("src") || "direct";
+    const url = APP_ANALYTICS_URL
+      + "?app_event=" + encodeURIComponent(event)
+      + "&cid=" + encodeURIComponent(clientId_())
+      + "&source=" + encodeURIComponent(src);
+    if(navigator.sendBeacon){ navigator.sendBeacon(url); }
+    else { fetch(url, {mode:"no-cors", keepalive:true}); }
+  }catch(e){}
+}
 
 let state = load();
 function load(){
@@ -352,7 +377,9 @@ state.name=(document.getElementById("nameIn").value||"").trim();
 const a=parseInt(document.getElementById("amtIn").value,10);
 state.daily=(!isNaN(a)&&a>0)?a:0;
 state.setup=true;
-save(); render();
+save();
+pingEvent_("app_start");
+render();
 };
 }
 
@@ -439,7 +466,7 @@ ${state.daily>0?`<div class="stat"><div class="v num">${fmtMoney(kept)}</div><di
 </div>`;
 
 const cb=document.getElementById("checkBtn");
-if(cb) cb.onclick=()=>{ const k=todayKey(); if(!state.checkins.includes(k)){ state.checkins.push(k); save(); } render(); };
+if(cb) cb.onclick=()=>{ const k=todayKey(); if(!state.checkins.includes(k)){ state.checkins.push(k); save(); pingEvent_("checkin"); } render(); };
 document.getElementById("urgeBtn").onclick=openUrge;
 document.getElementById("resetLink").onclick=(e)=>{
 e.preventDefault();

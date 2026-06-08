@@ -4,50 +4,68 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Ставка на себя · Чемпионат мира 2026</title>
+
+<!-- SEO + превью при шеринге (Open Graph / Twitter). og.png должен лежать в корне репозитория. -->
+<meta name="description" content="39 дней чемпионата без ставок. Спокойный спутник: счётчик дней, счётчик сохранённых денег и поддержка 24/7. Без осуждения." />
+<link rel="canonical" href="https://stavkanasebya.ru/" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://stavkanasebya.ru/" />
+<meta property="og:site_name" content="Ставка на себя" />
+<meta property="og:title" content="Ставка на себя · 39 дней без ставок" />
+<meta property="og:description" content="Пройди весь чемпионат, не сделав ни одной ставки. Счётчик дней, сохранённые деньги и спокойная поддержка 24/7." />
+<meta property="og:image" content="https://stavkanasebya.ru/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="ru_RU" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Ставка на себя · 39 дней без ставок" />
+<meta name="twitter:description" content="Пройди весь чемпионат, не сделав ни одной ставки. Спокойная поддержка 24/7." />
+<meta name="twitter:image" content="https://stavkanasebya.ru/og.png" />
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ───────────────────────────────────────────────────────────
-   «Ставка на себя» — спутник на время ЧМ-2026.
-   Не букмекерский интерфейс. Спокойный, без мерцания и
-   случайных наград. Тёплый, достойный, надёжный.
-   ─────────────────────────────────────────────────────────── */
+«Ставка на себя» — спутник на время ЧМ-2026.
+Не букмекерский интерфейс. Спокойный, без мерцания и
+случайных наград. Тёплый, достойный, надёжный.
+─────────────────────────────────────────────────────────── */
 :root{
-  --ink:#15181a;
-  --ink-2:#1b1f21;
-  --ink-3:#21262a;
-  --cream:#ece5d6;
-  --cream-dim:#9a9c92;
-  --cream-faint:#6f7269;
-  --sage:#8cbd9f;
-  --sage-deep:#5d8d71;
-  --amber:#d4a76b;
-  --line:rgba(236,229,214,.10);
-  --line-soft:rgba(236,229,214,.06);
+--ink:#15181a;
+--ink-2:#1b1f21;
+--ink-3:#21262a;
+--cream:#ece5d6;
+--cream-dim:#9a9c92;
+--cream-faint:#6f7269;
+--sage:#8cbd9f;
+--sage-deep:#5d8d71;
+--amber:#d4a76b;
+--line:rgba(236,229,214,.10);
+--line-soft:rgba(236,229,214,.06);
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
 body{
-  background:var(--ink);
-  color:var(--cream);
-  font-family:'Manrope',system-ui,sans-serif;
-  font-size:16px;line-height:1.5;
-  -webkit-font-smoothing:antialiased;
-  display:flex;justify-content:center;
-  min-height:100dvh;
-  overflow-x:hidden;
+background:var(--ink);
+color:var(--cream);
+font-family:'Manrope',system-ui,sans-serif;
+font-size:16px;line-height:1.5;
+-webkit-font-smoothing:antialiased;
+display:flex;justify-content:center;
+min-height:100dvh;
+overflow-x:hidden;
 }
 /* атмосфера: мягкое свечение + зерно */
 body::before{
-  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:
-    radial-gradient(120% 80% at 50% -10%, rgba(140,189,159,.10), transparent 55%),
-    radial-gradient(90% 60% at 50% 120%, rgba(212,167,107,.06), transparent 60%);
+content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+background:
+radial-gradient(120% 80% at 50% -10%, rgba(140,189,159,.10), transparent 55%),
+radial-gradient(90% 60% at 50% 120%, rgba(212,167,107,.06), transparent 60%);
 }
 body::after{
-  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.035;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.035;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 #app{position:relative;z-index:1;width:100%;max-width:468px;padding:26px 22px 40px;display:flex;flex-direction:column;min-height:100dvh}
 
@@ -91,7 +109,7 @@ h1,h2,h3{font-family:'Lora',Georgia,serif;font-weight:600;line-height:1.12}
 
 /* кнопки */
 .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:none;cursor:pointer;
-  font-family:'Manrope',sans-serif;font-size:16px;font-weight:600;border-radius:15px;padding:18px;transition:.18s}
+font-family:'Manrope',sans-serif;font-size:16px;font-weight:600;border-radius:15px;padding:18px;transition:.18s}
 .btn-primary{background:var(--sage);color:#10231a}
 .btn-primary:hover{background:#9bcaad}
 .btn-primary:active{transform:scale(.985)}
@@ -141,7 +159,7 @@ h1,h2,h3{font-family:'Lora',Georgia,serif;font-weight:600;line-height:1.12}
 .field label{display:block;font-size:13px;font-weight:600;color:var(--cream);margin-bottom:8px}
 .field .hint{font-size:12.5px;color:var(--cream-faint);margin-bottom:9px;line-height:1.45}
 .field input{width:100%;background:var(--ink-2);border:1px solid var(--line);border-radius:13px;
-  padding:15px 16px;color:var(--cream);font-family:'Manrope',sans-serif;font-size:16px;outline:none;transition:.18s}
+padding:15px 16px;color:var(--cream);font-family:'Manrope',sans-serif;font-size:16px;outline:none;transition:.18s}
 .field input:focus{border-color:var(--sage-deep)}
 .field input::placeholder{color:var(--cream-faint)}
 .amount-wrap{position:relative}
@@ -150,13 +168,13 @@ h1,h2,h3{font-family:'Lora',Georgia,serif;font-weight:600;line-height:1.12}
 
 /* ── ОВЕРЛЕЙ «ТЯЖЕЛО СЕЙЧАС» ── */
 .overlay{position:fixed;inset:0;z-index:50;background:rgba(13,15,16,.97);backdrop-filter:blur(6px);
-  display:none;flex-direction:column;align-items:center;justify-content:center;padding:34px 26px;text-align:center;overflow-y:auto}
+display:none;flex-direction:column;align-items:center;justify-content:center;padding:34px 26px;text-align:center;overflow-y:auto}
 .overlay.on{display:flex;animation:fade .4s ease}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 .overlay .ov-inner{max-width:360px;width:100%;display:flex;flex-direction:column;align-items:center}
 .breath{width:172px;height:172px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;margin:6px 0 8px}
 .breath .ring{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(140,189,159,.22),rgba(140,189,159,.04));
-  border:1.5px solid rgba(140,189,159,.4);animation:breathe 9s ease-in-out infinite}
+border:1.5px solid rgba(140,189,159,.4);animation:breathe 9s ease-in-out infinite}
 @keyframes breathe{0%,100%{transform:scale(.62);opacity:.55}50%{transform:scale(1);opacity:1}}
 .breath .timer{position:relative;font-family:'Lora',serif;font-size:44px;font-weight:600;color:var(--cream);font-variant-numeric:tabular-nums}
 .overlay h2{font-size:24px;margin:14px 0 12px}
@@ -184,76 +202,76 @@ a.reset:hover{color:var(--cream-dim)}
 
 <!-- Оверлей поддержки в момент тяги -->
 <div class="overlay" id="overlay">
-  <div class="ov-inner">
-    <div class="breath"><div class="ring"></div><div class="timer" id="ovTimer">5:00</div></div>
-    <button class="breath-cta" id="breathBtn">запустить 5 минут вместе</button>
-    <h2 class="serif">Сейчас тяжело. Это пройдёт.</h2>
-    <p>Тяга — это волна. Она поднимается, держится пару минут и спадает. Сама. Если переждать — она станет тише.</p>
-    <p class="reframe">Поставить кажется решением. Но математика букмекера не меняется от того, как сильно ты хочешь. В среднем — это всегда минус. Не сегодня.</p>
-    <div class="ov-actions">
-      <a class="btn btn-primary" id="botBtn" href="#" target="_blank" rel="noopener">Написать боту «Ставка на себя»</a>
-      <button class="btn btn-ghost" id="okBtn">Я переждал. Возвращаюсь.</button>
-    </div>
-    <div class="help-note" id="helpNote">
-      <b>Если хочется поговорить с человеком:</b><br>
-      Анонимные Игроки (GA) проводят встречи на русском — оффлайн и онлайн.<br>
-      <span id="helplineSlot">Телефон доверия: <i>добавь сюда проверённый номер для своего региона</i></span>
-    </div>
-  </div>
+<div class="ov-inner">
+<div class="breath"><div class="ring"></div><div class="timer" id="ovTimer">5:00</div></div>
+<button class="breath-cta" id="breathBtn">запустить 5 минут вместе</button>
+<h2 class="serif">Сейчас тяжело. Это пройдёт.</h2>
+<p>Тяга — это волна. Она поднимается, держится пару минут и спадает. Сама. Если переждать — она станет тише.</p>
+<p class="reframe">Поставить кажется решением. Но математика букмекера не меняется от того, как сильно ты хочешь. В среднем — это всегда минус. Не сегодня.</p>
+<div class="ov-actions">
+<a class="btn btn-primary" id="botBtn" href="#" target="_blank" rel="noopener">Написать боту «Ставка на себя»</a>
+<button class="btn btn-ghost" id="okBtn">Я переждал. Возвращаюсь.</button>
+</div>
+<div class="help-note" id="helpNote">
+<b>Если хочется поговорить с человеком:</b><br>
+Анонимные Игроки (GA) проводят встречи на русском — оффлайн и онлайн.<br>
+<span id="helplineSlot">Телефон доверия: <i>добавь сюда проверённый номер для своего региона</i></span>
+</div>
+</div>
 </div>
 
 <script>
 /* ════════════════════════════════════════════════════════════
-   НАСТРОЙКА — замени под свой проект
-   ════════════════════════════════════════════════════════════ */
-const BOT_URL  = "https://t.me/"; // ← @username твоего бота, напр. https://t.me/stavkanasebya_bot
-const WC_START = "2026-06-11";    // открытие ЧМ
-const WC_END   = "2026-07-19";    // финал
+НАСТРОЙКА — замени под свой проект
+════════════════════════════════════════════════════════════ */
+const BOT_URL = "https://t.me/SherlokNoBet_bot"; // ← клиентский бот Шерлок. Сверь @username, если менялся.
+const WC_START = "2026-06-11"; // открытие ЧМ
+const WC_END = "2026-07-19"; // финал
 
 /* Этапы турнира (даты ориентировочные — поправь по сетке) */
 const MILESTONES = [
-  {key:"2026-06-11", t:"Открытие",        dt:"11 июня · первый свисток"},
-  {key:"2026-06-27", t:"Группы пройдены", dt:"27 июня"},
-  {key:"2026-07-01", t:"1/16 финала",     dt:"начало плей-офф"},
-  {key:"2026-07-07", t:"1/8 финала",      dt:"7 июля"},
-  {key:"2026-07-11", t:"1/4 финала",      dt:"11 июля"},
-  {key:"2026-07-15", t:"1/2 финала",      dt:"15 июля"},
-  {key:"2026-07-19", t:"Финал",           dt:"19 июля · последний день"},
+{key:"2026-06-11", t:"Открытие", dt:"11 июня · первый свисток"},
+{key:"2026-06-27", t:"Группы пройдены", dt:"27 июня"},
+{key:"2026-07-01", t:"1/16 финала", dt:"начало плей-офф"},
+{key:"2026-07-07", t:"1/8 финала", dt:"7 июля"},
+{key:"2026-07-11", t:"1/4 финала", dt:"11 июля"},
+{key:"2026-07-15", t:"1/2 финала", dt:"15 июля"},
+{key:"2026-07-19", t:"Финал", dt:"19 июля · последний день"},
 ];
 
 /* ── надёжное хранилище: localStorage с откатом в память ── */
 const Store = (() => {
-  let mem = {};
-  let ok = false;
-  try { const k="__t"; localStorage.setItem(k,"1"); localStorage.removeItem(k); ok=true; } catch(e){ ok=false; }
-  return {
-    get(k){ try{ return ok ? localStorage.getItem(k) : (mem[k]??null); }catch(e){ return mem[k]??null; } },
-    set(k,v){ try{ ok ? localStorage.setItem(k,v) : (mem[k]=v); }catch(e){ mem[k]=v; } },
-    del(k){ try{ ok ? localStorage.removeItem(k) : (delete mem[k]); }catch(e){ delete mem[k]; } }
-  };
+let mem = {};
+let ok = false;
+try { const k="__t"; localStorage.setItem(k,"1"); localStorage.removeItem(k); ok=true; } catch(e){ ok=false; }
+return {
+get(k){ try{ return ok ? localStorage.getItem(k) : (mem[k]??null); }catch(e){ return mem[k]??null; } },
+set(k,v){ try{ ok ? localStorage.setItem(k,v) : (mem[k]=v); }catch(e){ mem[k]=v; } },
+del(k){ try{ ok ? localStorage.removeItem(k) : (delete mem[k]); }catch(e){ delete mem[k]; } }
+};
 })();
 const KEY="stavka_na_sebya_cm2026";
 
 let state = load();
 function load(){
-  try{ const raw=Store.get(KEY); if(raw) return JSON.parse(raw); }catch(e){}
-  return { setup:false, name:"", daily:0, checkins:[] };
+try{ const raw=Store.get(KEY); if(raw) return JSON.parse(raw); }catch(e){}
+return { setup:false, name:"", daily:0, checkins:[] };
 }
 function save(){ Store.set(KEY, JSON.stringify(state)); }
 
 /* ── даты ── */
 function todayKey(){
-  const d=new Date(), p=n=>String(n).padStart(2,"0");
-  return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`;
+const d=new Date(), p=n=>String(n).padStart(2,"0");
+return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`;
 }
 function toDate(k){ const [y,m,d]=k.split("-").map(Number); return new Date(y,m-1,d); }
 function diffDays(a,b){ return Math.round((toDate(b)-toDate(a))/86400000); } // b - a
 function fmtMoney(n){ return n.toLocaleString("ru-RU"); }
 function plural(n,one,few,many){
-  const m10=n%10, m100=n%100;
-  if(m10===1&&m100!==11) return one;
-  if(m10>=2&&m10<=4&&(m100<10||m100>=20)) return few;
-  return many;
+const m10=n%10, m100=n%100;
+if(m10===1&&m100!==11) return one;
+if(m10>=2&&m10<=4&&(m100<10||m100>=20)) return few;
+return many;
 }
 function dayWord(n){ return plural(n,"день","дня","дней"); }
 
@@ -262,219 +280,219 @@ function checkedToday(){ return state.checkins.includes(todayKey()); }
 function totalDays(){ return state.checkins.length; }
 function moneyKept(){ return totalDays()*(state.daily||0); }
 function currentStreak(){
-  if(!state.checkins.length) return 0;
-  const set=new Set(state.checkins);
-  const today=todayKey();
-  // стрик считаем от сегодня, если отмечено; иначе от вчера (без наказания за «ещё не отметил сегодня»)
-  let start = set.has(today) ? today : null;
-  if(!start){
-    const y=new Date(); y.setDate(y.getDate()-1);
-    const p=n=>String(n).padStart(2,"0");
-    const yk=`${y.getFullYear()}-${p(y.getMonth()+1)}-${p(y.getDate())}`;
-    if(set.has(yk)) start=yk; else return 0;
-  }
-  let streak=0, cur=toDate(start);
-  while(true){
-    const p=n=>String(n).padStart(2,"0");
-    const k=`${cur.getFullYear()}-${p(cur.getMonth()+1)}-${p(cur.getDate())}`;
-    if(set.has(k)){ streak++; cur.setDate(cur.getDate()-1); } else break;
-  }
-  return streak;
+if(!state.checkins.length) return 0;
+const set=new Set(state.checkins);
+const today=todayKey();
+// стрик считаем от сегодня, если отмечено; иначе от вчера (без наказания за «ещё не отметил сегодня»)
+let start = set.has(today) ? today : null;
+if(!start){
+const y=new Date(); y.setDate(y.getDate()-1);
+const p=n=>String(n).padStart(2,"0");
+const yk=`${y.getFullYear()}-${p(y.getMonth()+1)}-${p(y.getDate())}`;
+if(set.has(yk)) start=yk; else return 0;
+}
+let streak=0, cur=toDate(start);
+while(true){
+const p=n=>String(n).padStart(2,"0");
+const k=`${cur.getFullYear()}-${p(cur.getMonth()+1)}-${p(cur.getDate())}`;
+if(set.has(k)){ streak++; cur.setDate(cur.getDate()-1); } else break;
+}
+return streak;
 }
 function tournament(){
-  const t=todayKey();
-  const toStart=diffDays(t,WC_START);   // >0 если ещё не начался
-  const afterEnd=diffDays(WC_END,t);    // >0 если уже закончился
-  if(toStart>0) return {phase:"before", toStart};
-  if(afterEnd>0) return {phase:"after"};
-  const total=diffDays(WC_START,WC_END)+1;
-  const day=diffDays(WC_START,t)+1;
-  return {phase:"active", day, total};
+const t=todayKey();
+const toStart=diffDays(t,WC_START); // >0 если ещё не начался
+const afterEnd=diffDays(WC_END,t); // >0 если уже закончился
+if(toStart>0) return {phase:"before", toStart};
+if(afterEnd>0) return {phase:"after"};
+const total=diffDays(WC_START,WC_END)+1;
+const day=diffDays(WC_START,t)+1;
+return {phase:"active", day, total};
 }
 
 /* ════════════════════════════════════════════════════════════
-   РЕНДЕР
-   ════════════════════════════════════════════════════════════ */
+РЕНДЕР
+════════════════════════════════════════════════════════════ */
 const app=document.getElementById("app");
 
 function render(){
-  if(!state.setup){ renderSetup(); return; }
-  const tr=tournament();
-  if(tr.phase==="after"){ renderDone(); return; }
-  renderMain(tr);
+if(!state.setup){ renderSetup(); return; }
+const tr=tournament();
+if(tr.phase==="after"){ renderDone(); return; }
+renderMain(tr);
 }
 
 function renderSetup(){
-  app.innerHTML=`
-    <div class="setup">
-      <div class="eyebrow kicker rise d1">Чемпионат мира 2026</div>
-      <h1 class="rise d2">39 дней. Один турнир.<br><em>Одна ставка — на себя.</em></h1>
-      <p class="intro rise d3">Весь чемпионат вокруг будут звать поставить. Этот спутник — про обратное: дойти от открытия до финала, не сделав ни одной ставки. Каждый день — твой.</p>
+app.innerHTML=`
+<div class="setup">
+<div class="eyebrow kicker rise d1">Чемпионат мира 2026</div>
+<h1 class="rise d2">39 дней. Один турнир.<br><em>Одна ставка — на себя.</em></h1>
+<p class="intro rise d3">Весь чемпионат вокруг будут звать поставить. Этот спутник — про обратное: дойти от открытия до финала, не сделав ни одной ставки. Каждый день — твой.</p>
 
-      <div class="field rise d4">
-        <label for="nameIn">Как тебя называть?</label>
-        <div class="hint">Необязательно. Останется только на этом устройстве.</div>
-        <input id="nameIn" type="text" placeholder="Имя" autocomplete="off" maxlength="24" />
-      </div>
+<div class="field rise d4">
+<label for="nameIn">Как тебя называть?</label>
+<div class="hint">Необязательно. Останется только на этом устройстве.</div>
+<input id="nameIn" type="text" placeholder="Имя" autocomplete="off" maxlength="24" />
+</div>
 
-      <div class="field rise d5">
-        <label for="amtIn">Сколько ты обычно ставил за день матчей?</label>
-        <div class="hint">Это станет счётчиком денег, которые остаются у тебя. Можно пропустить.</div>
-        <div class="amount-wrap">
-          <input id="amtIn" type="number" inputmode="numeric" min="0" placeholder="напр. 1000" />
-          <span class="cur">₽</span>
-        </div>
-      </div>
+<div class="field rise d5">
+<label for="amtIn">Сколько ты обычно ставил за день матчей?</label>
+<div class="hint">Это станет счётчиком денег, которые остаются у тебя. Можно пропустить.</div>
+<div class="amount-wrap">
+<input id="amtIn" type="number" inputmode="numeric" min="0" placeholder="напр. 1000" />
+<span class="cur">₽</span>
+</div>
+</div>
 
-      <button class="btn btn-primary rise d6" id="startBtn">Я в деле</button>
-      <div class="skip rise d6">Ни одной ставки за весь чемпионат — вот и вся цель.</div>
-    </div>`;
-  document.getElementById("startBtn").onclick=()=>{
-    state.name=(document.getElementById("nameIn").value||"").trim();
-    const a=parseInt(document.getElementById("amtIn").value,10);
-    state.daily=(!isNaN(a)&&a>0)?a:0;
-    state.setup=true;
-    save(); render();
-  };
+<button class="btn btn-primary rise d6" id="startBtn">Я в деле</button>
+<div class="skip rise d6">Ни одной ставки за весь чемпионат — вот и вся цель.</div>
+</div>`;
+document.getElementById("startBtn").onclick=()=>{
+state.name=(document.getElementById("nameIn").value||"").trim();
+const a=parseInt(document.getElementById("amtIn").value,10);
+state.daily=(!isNaN(a)&&a>0)?a:0;
+state.setup=true;
+save(); render();
+};
 }
 
 function renderMain(tr){
-  const did=checkedToday();
-  const streak=currentStreak();
-  const total=totalDays();
-  const kept=moneyKept();
-  const name=state.name?`, ${state.name}`:"";
+const did=checkedToday();
+const streak=currentStreak();
+const total=totalDays();
+const kept=moneyKept();
+const name=state.name?`, ${state.name}`:"";
 
-  // статус турнира
-  let pill;
-  if(tr.phase==="before") pill=`До первого свистка <b>${tr.toStart} ${dayWord(tr.toStart)}</b>`;
-  else pill=`Турнир идёт · день <b>${tr.day}</b> из ${tr.total}`;
+// статус турнира
+let pill;
+if(tr.phase==="before") pill=`До первого свистка <b>${tr.toStart} ${dayWord(tr.toStart)}</b>`;
+else pill=`Турнир идёт · день <b>${tr.day}</b> из ${tr.total}`;
 
-  // hero: если задана сумма — деньги; иначе — дни
-  let heroLead, heroBig, heroUnit, heroCap;
-  if(state.daily>0){
-    heroLead = total>0 ? "Осталось у тебя, а не у конторы" : "Здесь будет копиться то, что осталось у тебя";
-    heroBig  = fmtMoney(kept);
-    heroUnit = "₽";
-    heroCap  = total>0
-      ? `За <b>${total} ${dayWord(total)}</b> ты не отдал этих денег никому. Они просто остались.`
-      : `Отметь первый день — и счётчик пойдёт.`;
-  } else {
-    heroLead = "С собой, а не против себя";
-    heroBig  = String(total);
-    heroUnit = dayWord(total);
-    heroCap  = total>0 ? `<b>${total} ${dayWord(total)}</b> без ставок. Каждый — твой выбор.` : `Отметь первый день — отсюда всё и начинается.`;
-  }
+// hero: если задана сумма — деньги; иначе — дни
+let heroLead, heroBig, heroUnit, heroCap;
+if(state.daily>0){
+heroLead = total>0 ? "Осталось у тебя, а не у конторы" : "Здесь будет копиться то, что осталось у тебя";
+heroBig = fmtMoney(kept);
+heroUnit = "₽";
+heroCap = total>0
+? `За <b>${total} ${dayWord(total)}</b> ты не отдал этих денег никому. Они просто остались.`
+: `Отметь первый день — и счётчик пойдёт.`;
+} else {
+heroLead = "С собой, а не против себя";
+heroBig = String(total);
+heroUnit = dayWord(total);
+heroCap = total>0 ? `<b>${total} ${dayWord(total)}</b> без ставок. Каждый — твой выбор.` : `Отметь первый день — отсюда всё и начинается.`;
+}
 
-  // блок отметки
-  const checkBlock = did
-    ? `<button class="btn btn-done" disabled>✓ Сегодня отмечено</button>
-       <div class="sub done">Сегодня — твоя. Возвращайся завтра.</div>`
-    : `<button class="btn btn-primary" id="checkBtn">Сегодня я не поставил</button>
-       <div class="sub">Одна отметка в день. Без героизма — просто честно.</div>`;
+// блок отметки
+const checkBlock = did
+? `<button class="btn btn-done" disabled>✓ Сегодня отмечено</button>
+<div class="sub done">Сегодня — твоя. Возвращайся завтра.</div>`
+: `<button class="btn btn-primary" id="checkBtn">Сегодня я не поставил</button>
+<div class="sub">Одна отметка в день. Без героизма — просто честно.</div>`;
 
-  // таймлайн
-  const t=todayKey();
-  let lastReached=-1;
-  MILESTONES.forEach((m,i)=>{ if(diffDays(m.key,t)>=0) lastReached=i; });
-  const nodes=MILESTONES.map((m,i)=>{
-    const reached=diffDays(m.key,t)>=0;
-    const current=(i===lastReached);
-    const cls=current?"current":reached?"reached":"future";
-    return `<div class="node ${cls}">
-      <div class="col"><div class="dot"></div><div class="line-v"></div></div>
-      <div class="body"><div class="t">${m.t}</div><div class="dt">${m.dt}</div></div>
-    </div>`;
-  }).join("");
+// таймлайн
+const t=todayKey();
+let lastReached=-1;
+MILESTONES.forEach((m,i)=>{ if(diffDays(m.key,t)>=0) lastReached=i; });
+const nodes=MILESTONES.map((m,i)=>{
+const reached=diffDays(m.key,t)>=0;
+const current=(i===lastReached);
+const cls=current?"current":reached?"reached":"future";
+return `<div class="node ${cls}">
+<div class="col"><div class="dot"></div><div class="line-v"></div></div>
+<div class="body"><div class="t">${m.t}</div><div class="dt">${m.dt}</div></div>
+</div>`;
+}).join("");
 
-  app.innerHTML=`
-    <div class="top rise d1">
-      <div class="brand"><div class="mark"></div><div class="name">Ставка&nbsp;на&nbsp;себя</div></div>
-      <div class="pill">${pill}</div>
-    </div>
+app.innerHTML=`
+<div class="top rise d1">
+<div class="brand"><div class="mark"></div><div class="name">Ставка&nbsp;на&nbsp;себя</div></div>
+<div class="pill">${pill}</div>
+</div>
 
-    <div class="hero rise d2">
-      <div class="lead">Привет${name}. ${heroLead}.</div>
-      <div class="figure"><div class="big num">${heroBig}</div><div class="unit">${heroUnit}</div></div>
-      <div class="cap">${heroCap}</div>
-    </div>
+<div class="hero rise d2">
+<div class="lead">Привет${name}. ${heroLead}.</div>
+<div class="figure"><div class="big num">${heroBig}</div><div class="unit">${heroUnit}</div></div>
+<div class="cap">${heroCap}</div>
+</div>
 
-    <div class="stats rise d3">
-      <div class="stat"><div class="v green num">${streak}</div><div class="l">${dayWord(streak)} подряд</div></div>
-      <div class="stat"><div class="v num">${total}</div><div class="l">${dayWord(total)} всего</div></div>
-      ${state.daily>0?`<div class="stat"><div class="v num">${fmtMoney(kept)}</div><div class="l">₽ при тебе</div></div>`:""}
-    </div>
+<div class="stats rise d3">
+<div class="stat"><div class="v green num">${streak}</div><div class="l">${dayWord(streak)} подряд</div></div>
+<div class="stat"><div class="v num">${total}</div><div class="l">${dayWord(total)} всего</div></div>
+${state.daily>0?`<div class="stat"><div class="v num">${fmtMoney(kept)}</div><div class="l">₽ при тебе</div></div>`:""}
+</div>
 
-    <div class="checkblock rise d4">${checkBlock}</div>
+<div class="checkblock rise d4">${checkBlock}</div>
 
-    <button class="btn btn-ghost rise d4" id="urgeBtn" style="margin-top:11px">Тяжело прямо сейчас?</button>
+<button class="btn btn-ghost rise d4" id="urgeBtn" style="margin-top:11px">Тяжело прямо сейчас?</button>
 
-    <div class="section-h rise d5"><div class="eyebrow">Путь до финала</div><div class="rule"></div></div>
-    <div class="timeline rise d5">${nodes}</div>
+<div class="section-h rise d5"><div class="eyebrow">Путь до финала</div><div class="rule"></div></div>
+<div class="timeline rise d5">${nodes}</div>
 
-    <div class="foot rise d6">
-      <p class="disc">Это не медицинская помощь и не лечение. Спутник, чтобы продержаться. Если тяжело — обратись к специалисту.</p>
-      <div class="links">
-        <a id="footBot" href="${BOT_URL}" target="_blank" rel="noopener">Бот поддержки</a>
-        <a class="reset" id="resetLink" href="#">Сбросить</a>
-      </div>
-    </div>`;
+<div class="foot rise d6">
+<p class="disc">Это не медицинская помощь и не лечение. Спутник, чтобы продержаться. Если тяжело — обратись к специалисту.</p>
+<div class="links">
+<a id="footBot" href="${BOT_URL}" target="_blank" rel="noopener">Бот поддержки</a>
+<a class="reset" id="resetLink" href="#">Сбросить</a>
+</div>
+</div>`;
 
-  const cb=document.getElementById("checkBtn");
-  if(cb) cb.onclick=()=>{ const k=todayKey(); if(!state.checkins.includes(k)){ state.checkins.push(k); save(); } render(); };
-  document.getElementById("urgeBtn").onclick=openUrge;
-  document.getElementById("resetLink").onclick=(e)=>{
-    e.preventDefault();
-    if(confirm("Сбросить весь прогресс? Это нельзя отменить.")){ state={setup:false,name:"",daily:0,checkins:[]}; save(); render(); }
-  };
+const cb=document.getElementById("checkBtn");
+if(cb) cb.onclick=()=>{ const k=todayKey(); if(!state.checkins.includes(k)){ state.checkins.push(k); save(); } render(); };
+document.getElementById("urgeBtn").onclick=openUrge;
+document.getElementById("resetLink").onclick=(e)=>{
+e.preventDefault();
+if(confirm("Сбросить весь прогресс? Это нельзя отменить.")){ state={setup:false,name:"",daily:0,checkins:[]}; save(); render(); }
+};
 }
 
 function renderDone(){
-  const total=totalDays();
-  const kept=moneyKept();
-  app.innerHTML=`
-    <div class="done-screen">
-      <div class="trophy rise d1">🕯️</div>
-      <div class="eyebrow rise d1" style="margin-bottom:14px">Чемпионат окончен</div>
-      <h1 class="serif rise d2">Ты прошёл весь турнир,<br>не сделав ни одной ставки.</h1>
-      ${state.daily>0?`<div class="total num rise d3">${fmtMoney(kept)} ₽</div><p class="rise d3">остались у тебя</p>`:""}
-      <p class="rise d4">${total} ${dayWord(total)} ты выбирал себя — пока вокруг ставили. Это и была твоя ставка. И она сыграла.</p>
-      <div style="width:100%;max-width:300px;margin-top:26px" class="rise d5">
-        <a class="btn btn-primary" href="${BOT_URL}" target="_blank" rel="noopener">Что дальше — спросить у бота</a>
-        <a class="reset" id="resetLink2" href="#" style="display:inline-block;margin-top:18px">Начать заново</a>
-      </div>
-    </div>`;
-  document.getElementById("resetLink2").onclick=(e)=>{
-    e.preventDefault();
-    if(confirm("Начать заново? Текущий прогресс сотрётся.")){ state={setup:false,name:"",daily:0,checkins:[]}; save(); render(); }
-  };
+const total=totalDays();
+const kept=moneyKept();
+app.innerHTML=`
+<div class="done-screen">
+<div class="trophy rise d1">🕯️</div>
+<div class="eyebrow rise d1" style="margin-bottom:14px">Чемпионат окончен</div>
+<h1 class="serif rise d2">Ты прошёл весь турнир,<br>не сделав ни одной ставки.</h1>
+${state.daily>0?`<div class="total num rise d3">${fmtMoney(kept)} ₽</div><p class="rise d3">остались у тебя</p>`:""}
+<p class="rise d4">${total} ${dayWord(total)} ты выбирал себя — пока вокруг ставили. Это и была твоя ставка. И она сыграла.</p>
+<div style="width:100%;max-width:300px;margin-top:26px" class="rise d5">
+<a class="btn btn-primary" href="${BOT_URL}" target="_blank" rel="noopener">Что дальше — спросить у бота</a>
+<a class="reset" id="resetLink2" href="#" style="display:inline-block;margin-top:18px">Начать заново</a>
+</div>
+</div>`;
+document.getElementById("resetLink2").onclick=(e)=>{
+e.preventDefault();
+if(confirm("Начать заново? Текущий прогресс сотрётся.")){ state={setup:false,name:"",daily:0,checkins:[]}; save(); render(); }
+};
 }
 
 /* ── оверлей «тяжело сейчас» ── */
 const overlay=document.getElementById("overlay");
 let timerId=null, timeLeft=300;
 function openUrge(){
-  overlay.classList.add("on");
-  document.getElementById("botBtn").href=BOT_URL;
-  resetTimer();
+overlay.classList.add("on");
+document.getElementById("botBtn").href=BOT_URL;
+resetTimer();
 }
 function closeUrge(){ overlay.classList.remove("on"); stopTimer(); }
 function fmtT(s){ const m=Math.floor(s/60), ss=String(s%60).padStart(2,"0"); return `${m}:${ss}`; }
 function resetTimer(){ stopTimer(); timeLeft=300; document.getElementById("ovTimer").textContent=fmtT(timeLeft); document.getElementById("breathBtn").textContent="запустить 5 минут вместе"; }
 function stopTimer(){ if(timerId){ clearInterval(timerId); timerId=null; } }
 document.getElementById("breathBtn").onclick=function(){
-  if(timerId){ stopTimer(); this.textContent="продолжить"; return; }
-  this.textContent="пауза";
-  timerId=setInterval(()=>{
-    timeLeft--;
-    document.getElementById("ovTimer").textContent= timeLeft>0 ? fmtT(timeLeft) : "—";
-    if(timeLeft<=0){
-      stopTimer();
-      document.getElementById("ovTimer").textContent="✓";
-      document.querySelector("#overlay h2").textContent="Волна прошла. Ты всё ещё здесь.";
-      document.getElementById("breathBtn").textContent="ещё раз";
-    }
-  },1000);
+if(timerId){ stopTimer(); this.textContent="продолжить"; return; }
+this.textContent="пауза";
+timerId=setInterval(()=>{
+timeLeft--;
+document.getElementById("ovTimer").textContent= timeLeft>0 ? fmtT(timeLeft) : "—";
+if(timeLeft<=0){
+stopTimer();
+document.getElementById("ovTimer").textContent="✓";
+document.querySelector("#overlay h2").textContent="Волна прошла. Ты всё ещё здесь.";
+document.getElementById("breathBtn").textContent="ещё раз";
+}
+},1000);
 };
 document.getElementById("okBtn").onclick=closeUrge;
 overlay.addEventListener("click",e=>{ if(e.target===overlay) closeUrge(); });

@@ -230,6 +230,8 @@ const WC_END = "2026-07-19"; // финал
 // Аналитика приложения. Вставь сюда Apps Script /exec URL (тот же, что WEB_APP_URL у бота).
 // Пусто = аналитика выключена, на работу приложения не влияет.
 const APP_ANALYTICS_URL = "https://script.google.com/macros/s/AKfycbzRCeTObFr21T-fCPj383I37E3KStImj8Utm2OvgpIyJFLLIB8fzjbQ985Thhn0CGhT/exec";
+const IG_URL = "https://www.instagram.com/no_more.bet";
+const THREADS_URL = "https://www.threads.com/@no_more.bet";
 
 /* Этапы турнира (даты ориентировочные — поправь по сетке) */
 const MILESTONES = [
@@ -460,7 +462,9 @@ ${state.daily>0?`<div class="stat"><div class="v num">${fmtMoney(kept)}</div><di
 <div class="foot rise d6">
 <p class="disc">Это не медицинская помощь и не лечение. Спутник, чтобы продержаться. Если тяжело — обратись к специалисту.</p>
 <div class="links">
-<a id="footBot" href="${BOT_URL}" target="_blank" rel="noopener">Бот поддержки</a>
+<a id="footBot" href="${BOT_URL}" target="_blank" rel="noopener">Telegram</a>
+<a href="${IG_URL}" target="_blank" rel="noopener">Instagram</a>
+<a href="${THREADS_URL}" target="_blank" rel="noopener">Threads</a>
 <a class="reset" id="resetLink" href="#">Сбросить</a>
 </div>
 </div>`;

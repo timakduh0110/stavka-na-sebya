@@ -280,6 +280,7 @@ function pingEvent_(event){
 }
 
 let state = load();
+let view = null;
 function load(){
 try{ const raw=Store.get(KEY); if(raw) return JSON.parse(raw); }catch(e){}
 return { setup:false, name:"", daily:0, checkins:[] };
@@ -343,10 +344,49 @@ return {phase:"active", day, total};
 const app=document.getElementById("app");
 
 function render(){
+if(view==="about"){ renderAbout(); return; }
+if(view==="vision"){ renderVision(); return; }
 if(!state.setup){ renderSetup(); return; }
 const tr=tournament();
 if(tr.phase==="after"){ renderDone(); return; }
 renderMain(tr);
+}
+
+function renderAbout(){
+app.innerHTML=`
+<div class="setup">
+<a class="reset" id="backLink" href="#" style="align-self:flex-start;margin-bottom:16px">← назад</a>
+<div class="eyebrow rise d1">О проекте</div>
+<h1 class="rise d2" style="font-size:30px;margin:8px 0 18px">Почему «Ставка на себя»</h1>
+<div class="rise d3" style="color:var(--cream-dim);font-size:15px;line-height:1.6">
+<p style="margin-bottom:14px">Каждый большой турнир повторяется одно и то же. Реклама ставок повсюду, «поставь на матч» подают как часть праздника. И миллионы людей незаметно затягивает.</p>
+<p style="margin-bottom:14px">Мы видели, как «одна ставка для интереса» превращается в бессонные ночи, в долги и в ощущение, что днём управляешь уже не ты, а следующая ставка.</p>
+<p style="margin-bottom:14px">«Просто не ставь» не работает. Пустота на месте ставки и есть самое тяжёлое. Поэтому мы сделали не нотацию, а спокойного спутника на время турнира.</p>
+<p style="margin-bottom:14px">Трекер считает твои чистые дни и деньги, которые остались у тебя, а не у конторы. А бот рядом круглосуточно, без осуждения, особенно когда тянет сделать «ещё одну».</p>
+<p style="margin-bottom:14px">Это не лечение и не магия. Это поддержка и честный счёт. Маленький шаг, который можно начать сейчас и пройти не в одиночку.</p>
+<p class="serif" style="font-size:19px;color:var(--sage);margin-top:18px">Ставка на себя. Пока все ставят на матч.</p>
+</div>
+</div>`;
+document.getElementById("backLink").onclick=(e)=>{ e.preventDefault(); view=null; render(); };
+}
+
+function renderVision(){
+app.innerHTML=`
+<div class="setup">
+<a class="reset" id="backLink" href="#" style="align-self:flex-start;margin-bottom:16px">← назад</a>
+<div class="eyebrow rise d1">Куда это растёт</div>
+<h1 class="rise d2" style="font-size:30px;margin:8px 0 18px">Это только Сезон 1</h1>
+<div class="rise d3" style="color:var(--cream-dim);font-size:15px;line-height:1.6">
+<p style="margin-bottom:14px">Чемпионат это Сезон 1. Если отклик есть, «Ставка на себя» станет постоянным спутником, а не разовой акцией.</p>
+<p style="color:var(--cream);margin-bottom:10px">Куда это может вырасти:</p>
+<p style="margin-bottom:10px">→ Новые сезоны под крупные события: Олимпиада, сезоны лиг, «месяц без ставок».</p>
+<p style="margin-bottom:10px">→ Совместные цели и личный прогресс. Без рейтингов и соревнования, только «мы».</p>
+<p style="margin-bottom:10px">→ Живая помощь: со временем подключить настоящего психолога и проверенные ресурсы.</p>
+<p style="margin-bottom:14px">→ Бережное сообщество тех, кто проходит это рядом, с модерацией.</p>
+<p class="serif" style="font-size:18px;color:var(--sage);margin-top:14px">Без обещаний чудес и без спешки. Сначала спрос, потом стройка.</p>
+</div>
+</div>`;
+document.getElementById("backLink").onclick=(e)=>{ e.preventDefault(); view=null; render(); };
 }
 
 function renderSetup(){
@@ -363,8 +403,8 @@ app.innerHTML=`
 </div>
 
 <div class="field rise d5">
-<label for="amtIn">Сколько ты обычно ставил за день матчей?</label>
-<div class="hint">Это станет счётчиком денег, которые остаются у тебя. Можно пропустить.</div>
+<label for="amtIn">Сколько в среднем ты ставил за день, в рублях?</label>
+<div class="hint">Просто сумма в рублях. Станет счётчиком денег, которые остаются у тебя. Можно пропустить.</div>
 <div class="amount-wrap">
 <input id="amtIn" type="number" inputmode="numeric" min="0" placeholder="напр. 1000" />
 <span class="cur">₽</span>
@@ -373,6 +413,7 @@ app.innerHTML=`
 
 <button class="btn btn-primary rise d6" id="startBtn">Я в деле</button>
 <div class="skip rise d6">Ни одной ставки за весь чемпионат — вот и вся цель.</div>
+<div class="skip rise d6" style="margin-top:6px"><a class="reset" id="aboutLink2" href="#">Зачем это всё? Наша история</a></div>
 </div>`;
 document.getElementById("startBtn").onclick=()=>{
 state.name=(document.getElementById("nameIn").value||"").trim();
@@ -383,6 +424,7 @@ save();
 pingEvent_("app_start");
 render();
 };
+document.getElementById("aboutLink2").onclick=(e)=>{ e.preventDefault(); view="about"; render(); };
 }
 
 function renderMain(tr){
@@ -462,6 +504,8 @@ ${state.daily>0?`<div class="stat"><div class="v num">${fmtMoney(kept)}</div><di
 <div class="foot rise d6">
 <p class="disc">Это не медицинская помощь и не лечение. Спутник, чтобы продержаться. Если тяжело — обратись к специалисту.</p>
 <div class="links">
+<a href="#" id="aboutLink">О нас</a>
+<a href="#" id="visionLink">Куда растём</a>
 <a id="footBot" href="${BOT_URL}" target="_blank" rel="noopener">Telegram</a>
 <a href="${IG_URL}" target="_blank" rel="noopener">Instagram</a>
 <a href="${THREADS_URL}" target="_blank" rel="noopener">Threads</a>
@@ -476,6 +520,8 @@ document.getElementById("resetLink").onclick=(e)=>{
 e.preventDefault();
 if(confirm("Сбросить весь прогресс? Это нельзя отменить.")){ state={setup:false,name:"",daily:0,checkins:[]}; save(); render(); }
 };
+document.getElementById("aboutLink").onclick=(e)=>{ e.preventDefault(); view="about"; render(); };
+document.getElementById("visionLink").onclick=(e)=>{ e.preventDefault(); view="vision"; render(); };
 }
 
 function renderDone(){

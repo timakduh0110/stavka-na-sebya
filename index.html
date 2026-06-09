@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Ставка на себя · Чемпионат мира 2026</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 <!-- SEO + превью при шеринге (Open Graph / Twitter). og.png должен лежать в корне репозитория. -->
 <meta name="description" content="39 дней чемпионата без ставок. Спокойный спутник: счётчик дней, счётчик сохранённых денег и поддержка 24/7. Без осуждения." />
@@ -281,6 +282,7 @@ function pingEvent_(event){
 
 let state = load();
 let view = null;
+let checkinOpen = false;
 function load(){
 try{ const raw=Store.get(KEY); if(raw) return JSON.parse(raw); }catch(e){}
 return { setup:false, name:"", daily:0, checkins:[] };
@@ -304,12 +306,13 @@ return many;
 function dayWord(n){ return plural(n,"день","дня","дней"); }
 
 /* ── вычисления ── */
-function checkedToday(){ return state.checkins.includes(todayKey()); }
+function checkinDates(){ return state.checkins.map(c=> (typeof c==="string" ? c : c.d)); }
+function checkedToday(){ return checkinDates().includes(todayKey()); }
 function totalDays(){ return state.checkins.length; }
-function moneyKept(){ return totalDays()*(state.daily||0); }
+function moneyKept(){ return state.checkins.reduce((s,c)=> s + (typeof c==="string" ? (state.daily||0) : (Number(c.amt)||0)), 0); }
 function currentStreak(){
 if(!state.checkins.length) return 0;
-const set=new Set(state.checkins);
+const set=new Set(checkinDates());
 const today=todayKey();
 // стрик считаем от сегодня, если отмечено; иначе от вчера (без наказания за «ещё не отметил сегодня»)
 let start = set.has(today) ? today : null;
@@ -404,7 +407,7 @@ app.innerHTML=`
 
 <div class="field rise d5">
 <label for="amtIn">Сколько в среднем ты ставил за день, в рублях?</label>
-<div class="hint">Просто сумма в рублях. Станет счётчиком денег, которые остаются у тебя. Можно пропустить.</div>
+<div class="hint">Это сумма по умолчанию. Каждый день сможешь указать, сколько хотел поставить и не поставил. Можно пропустить.</div>
 <div class="amount-wrap">
 <input id="amtIn" type="number" inputmode="numeric" min="0" placeholder="напр. 1000" />
 <span class="cur">₽</span>
@@ -456,11 +459,18 @@ heroCap = total>0 ? `<b>${total} ${dayWord(total)}</b> без ставок. Ка
 }
 
 // блок отметки
-const checkBlock = did
-? `<button class="btn btn-done" disabled>✓ Сегодня отмечено</button>
-<div class="sub done">Сегодня — твоя. Возвращайся завтра.</div>`
-: `<button class="btn btn-primary" id="checkBtn">Сегодня я не поставил</button>
-<div class="sub">Одна отметка в день. Без героизма — просто честно.</div>`;
+let checkBlock;
+if(did){
+checkBlock=`<button class="btn btn-done" disabled>✓ Сегодня отмечено</button>
+<div class="sub done">Сегодня твоя. Возвращайся завтра.</div>`;
+} else if(checkinOpen){
+checkBlock=`<div class="amount-wrap"><input id="dayAmt" type="number" inputmode="numeric" min="0" placeholder="напр. 1000" value="${state.daily||''}" /><span class="cur">₽</span></div>
+<button class="btn btn-primary" id="saveDay" style="margin-top:10px">Сохранить день</button>
+<div class="sub">Сколько ты хотел поставить сегодня и не поставил. <a class="reset" id="cancelDay" href="#">отмена</a></div>`;
+} else {
+checkBlock=`<button class="btn btn-primary" id="checkBtn">Сегодня я не поставил</button>
+<div class="sub">Одна отметка в день. Без героизма, просто честно.</div>`;
+}
 
 // таймлайн
 const t=todayKey();
@@ -514,7 +524,18 @@ ${state.daily>0?`<div class="stat"><div class="v num">${fmtMoney(kept)}</div><di
 </div>`;
 
 const cb=document.getElementById("checkBtn");
-if(cb) cb.onclick=()=>{ const k=todayKey(); if(!state.checkins.includes(k)){ state.checkins.push(k); save(); pingEvent_("checkin"); } render(); };
+if(cb) cb.onclick=()=>{ checkinOpen=true; render(); };
+const sd=document.getElementById("saveDay");
+if(sd) sd.onclick=()=>{
+const k=todayKey();
+const el=document.getElementById("dayAmt");
+const a=parseInt(el&&el.value,10);
+const amt=(!isNaN(a)&&a>0)?a:0;
+if(!checkinDates().includes(k)){ state.checkins.push({d:k,amt:amt}); if(amt>0) state.daily=amt; save(); pingEvent_("checkin"); }
+checkinOpen=false; render();
+};
+const cd=document.getElementById("cancelDay");
+if(cd) cd.onclick=(e)=>{ e.preventDefault(); checkinOpen=false; render(); };
 document.getElementById("urgeBtn").onclick=openUrge;
 document.getElementById("resetLink").onclick=(e)=>{
 e.preventDefault();
@@ -575,6 +596,7 @@ document.getElementById("okBtn").onclick=closeUrge;
 overlay.addEventListener("click",e=>{ if(e.target===overlay) closeUrge(); });
 
 /* старт */
+try{ if(window.Telegram && Telegram.WebApp){ Telegram.WebApp.ready(); Telegram.WebApp.expand(); } }catch(e){}
 render();
 </script>
 </body>
